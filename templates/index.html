@@ -21,5 +21,11 @@ Current filter is {{filter}}
         </li>
     {% endrecursetree %}
 </ul>
+<ul>
+{% if items %}
+{% for item in items %}
+  {{ item }}
+{% endfor %}
+{% endif %}
 </body>
 </html>
