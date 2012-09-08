@@ -21,11 +21,12 @@ Current filter is {{filter}}
         </li>
     {% endrecursetree %}
 </ul>
-<ul>
 {% if items %}
+<ul>
 {% for item in items %}
-  {{ item }}
+  <li>{{ item.name }} ({{ item.pixel_width }}x{{ item.pixel_height }}) {{ item.fandoms }}</li>
 {% endfor %}
+</ul>
 {% endif %}
 </body>
 </html>
