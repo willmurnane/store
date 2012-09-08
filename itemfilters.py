@@ -3,7 +3,7 @@ import re
 filter_router = {}
 
 def RegisterFilter(regex, func):
-	filter_router[regex] = func
+	filter_router[re.compile(regex)] = func
 
 def FindFilter(filtertext):
 	for regex in filter_router:
