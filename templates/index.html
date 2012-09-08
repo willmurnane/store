@@ -6,7 +6,7 @@ Current filter is {{filter}}
 <ul class="root">
     {% recursetree tree %}
         <li>
-            <a href="/filter/fandom={{ node.lft }}-{{ node.rght }}">{{ node.name }} ({{ node.s }})</a>
+            <a href="/filter/fandom={{ node.lft }}-{{ node.rght }}">{{ node.name }} ({{ node.sub_images }})</a>
             {% if not node.is_leaf_node %}
                 <ul class="children">
                     {{ children }}
