@@ -3,9 +3,11 @@
 <head><title>Welcome to $STORE!</title></head>
 <body>
 Current filter is {{filter}}
+{% if tree %}
 {% if filter %}
 {% drilldown_tree_for_node tree as breadcrumbs %}
 {% recursetree breadcrumbs %} {% if not node.is_leaf_node %} {{ node.name }} >> {% endif %} {% endrecursetree %}
+{% endif %}
 {% endif %}
 <ul class="root">
     {% recursetree tree %}
