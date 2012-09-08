@@ -3,9 +3,12 @@ from django.shortcuts import render_to_response
 from store.models import FandomHierarchy
 from store.itemfilters import ApplyPredicates
 
-def frontpage(request, filter=None):
-	nodes = FandomHierarchy.objects.all()
+def frontpage(request)
+	tree = FandomHierarchy.objects.all()
+	return render_to_response('index.html', {'filter': None, 'tree': tree})
+
+def filtered(request, filter):
+	tree = FandomHierarchy.objects.all()
 	if filter:
-		nodes = ApplyPredicates(filter, nodes)
-		
-	return render_to_response('index.html', {'filter': filter, 'nodes': nodes})
+		tree = ApplyPredicates(filter, tree)
+	return render_to_response('index.html', {'filter': filter, 'tree': tree})
