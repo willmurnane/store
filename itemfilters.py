@@ -13,7 +13,7 @@ def FindFilter(filtertext):
 	raise "Couldn't find filter matching \"%s\"" % filtertext
 
 def byFandom(fandomId=None):
-	return lambda(nodes): nodes.filter(fandom_id=fandomId)
+	return lambda(nodes): nodes.filter(id=fandomId)
 
 
 """Select a subset of items based on the filter described by filters"""
