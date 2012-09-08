@@ -12,7 +12,7 @@ def FindFilter(filtertext):
 			return filter_router[regex](**matches.groupdict())
 	raise "Couldn't find filter matching \"%s\"" % filtertext
 
-def byFandom(**kwargs):
+def byFandom(fandomId=None):
 	return lambda(nodes): nodes.filter(fandom_id=fandomId)
 
 
