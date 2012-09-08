@@ -11,5 +11,5 @@ def filtered(request, filter):
 	tree = FandomHierarchy.objects.all()
 	items = Image.objects.all()
 	if filter:
-		tree = ApplyPredicates(filter, tree)
+		tree = ApplyPredicates(filter, items)
 	return render_to_response('index.html', {'filter': filter, 'tree': tree, 'items': items})
