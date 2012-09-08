@@ -1,6 +1,7 @@
 # Django settings for store project.
 
 import os
+import socket
 import sys
 PROJECT_ROOT = os.path.dirname(__file__)
 
@@ -15,7 +16,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
+if socket.gethostname() == "force":
+  DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'django_store',                      # Or path to database file if using sqlite3.
@@ -24,7 +26,14 @@ DATABASES = {
         'HOST': 'mysql.twoevils.net',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
-}
+  }
+else:
+  DATABASES = {
+    'default': {
+	'ENGINE': 'sqlite3',
+	'NAME': 'store.db',
+    }
+  }
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name

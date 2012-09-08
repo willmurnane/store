@@ -8,7 +8,7 @@ def frontpage(request):
 	return render_to_response('index.html', {'filter': None, 'tree': tree})
 
 def filtered(request, filter):
-	tree = FandomHierarchy.objects.all()
+	tree = Images.objects.all()
 	if filter:
 		tree = ApplyPredicates(filter, tree)
 	return render_to_response('index.html', {'filter': filter, 'tree': tree})

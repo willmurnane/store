@@ -6,7 +6,7 @@ class FandomHierarchy(MPTTModel):
 	parent = TreeForeignKey('self', null=True, related_name='children')
 	def __unicode__(self):
 		return "|%s%s" % (" " * self.level, self.name)
-	
+
 class Image(models.Model):
 	pixel_width = models.IntegerField()
 	pixel_height = models.IntegerField()
@@ -15,7 +15,7 @@ class Image(models.Model):
 	image = models.ImageField(upload_to='source_images')
 	def __unicode__(self):
 		return "%s (%dx%d)" % (self.name, self.pixel_width, self.pixel_height)
-	
+
 class Media(models.Model):
 	name = models.CharField(max_length=100)
 	visible_width = models.FloatField(help_text="Inches.")
