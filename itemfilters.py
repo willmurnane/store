@@ -9,7 +9,7 @@ def FindFilter(filtertext):
 	for regex in filter_router:
 		matches = regex.match(filtertext)
 		if matches:
-			return filter_router[regex](*matches.groupdict())
+			return filter_router[regex](**matches.groupdict())
 	raise "Couldn't find filter matching \"%s\"" % filtertext
 
 def byFandom(**kwargs):
