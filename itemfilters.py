@@ -10,16 +10,17 @@ def FindFilter(filtertext):
 		matches = regex.match(filtertext)
 		if matches:
 			return filter_router[regex](*matches.groupdict())
-	throw
+	raise "Couldn't find filter matching \"%s\"" % filtertext
 
 def byFandom(**kwargs):
 	return lambda(nodes): nodes.filter(fandom_id=fandomId)
 
-def __init__():
-	RegisterFilter("^fandom=(?P<fandomId>\d+)", byFandom)
 
 """Select a subset of items based on the filter described by filters"""
 def ApplyPredicates(filters, items):
 	filter_list = filters.split(',')
 	for filter in filter_list:
 		items = FindFilter(filter)(items)
+
+
+RegisterFilter("^fandom=(?P<fandomId>\d+)", byFandom)
