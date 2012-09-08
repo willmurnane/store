@@ -14,7 +14,7 @@ class Image(models.Model):
 	fandoms = models.ManyToManyField(FandomHierarchy)
 	image = models.ImageField(upload_to='source_images')
 	def __unicode__(self):
-		return "Image instance %s (%dx%d)" % (self.name, self.pixel_width, self.pixel_height)
+		return "%s (%dx%d)" % (self.name, self.pixel_width, self.pixel_height)
 	
 class Media(models.Model):
 	name = models.CharField(max_length=100)
@@ -28,4 +28,4 @@ class Media(models.Model):
 	exterior_depth = models.FloatField()
 	stock_amount = models.IntegerField(help_text="Number currently in stock.")
 	def __unicode__(self):
-		return "Media instance %s, %d in stock" % (self.name, self.stock_amount)
+		return "%s, %d in stock" % (self.name, self.stock_amount)
