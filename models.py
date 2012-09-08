@@ -9,7 +9,7 @@ class Image(models.Model):
 	pixel_height = models.IntegerField()
 	name = models.CharField(max_length=100)
 	fandoms = models.ManyToManyField(FandomHierarchy)
-	image = models.ImageField()
+	image = models.ImageField(upload_to='source_images')
 	
 class Media(models.Model):
 	visible_width = models.FloatField()
