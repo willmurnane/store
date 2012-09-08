@@ -4,11 +4,11 @@ from store.models import FandomHierarchy, Image
 from store.itemfilters import ApplyPredicates
 
 def frontpage(request):
-	tree = FandomHierarchy.objects.filter(parent_id=None).get_root()
+	tree = FandomHierarchy.objects.filter(parent=None).get_root()
 	return render_to_response('index.html', {'filter': None, 'tree': tree})
 
 def filtered(request, filter):
-	tree = FandomHierarchy.objects.filter(parent_id=None).get_root()
+	tree = FandomHierarchy.objects.filter(parent=None).get_root()
 	items = Image.objects.all()
 	if filter:
 		items = ApplyPredicates(filter, items)
