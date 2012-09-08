@@ -4,7 +4,7 @@
 <body>
 Current filter is {{filter}}
 <ul class="root">
-    {% recursetree nodes %}
+    {% recursetree tree %}
         <li>
             <a href="?filter:{% if filter %}{{filter}},{% endif %}fandom={{ node.id }}">{{ node.name }}</a>
             {% if not node.is_leaf_node %}
