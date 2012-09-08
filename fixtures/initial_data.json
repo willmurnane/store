@@ -1,0 +1,18 @@
+[{"pk": 1, "model": "store.fandomhierarchy", "fields": {"rght": 28, "name": "Pokemon", "parent": null, "level": 0, "lft": 1, "tree_id": 1}},
+ {"pk": 2, "model": "store.fandomhierarchy", "fields": {"rght": 5, "name": "Ruby/Sapphire/Emerald", "parent": 1, "level": 1, "lft": 2, "tree_id": 1}},
+ {"pk": 3, "model": "store.fandomhierarchy", "fields": {"rght": 4, "name": "Starters", "parent": 2, "level": 2, "lft": 3, "tree_id": 1}},
+ {"pk": 5, "model": "store.fandomhierarchy", "fields": {"rght": 9, "name": "Gold/Silver/Crystal", "parent": 1, "level": 1, "lft": 6, "tree_id": 1}},
+ {"pk": 6, "model": "store.fandomhierarchy", "fields": {"rght": 8, "name": "Starters", "parent": 5, "level": 2, "lft": 7, "tree_id": 1}},
+ {"pk": 7, "model": "store.fandomhierarchy", "fields": {"rght": 13, "name": "Red/Green/Blue", "parent": 1, "level": 1, "lft": 10, "tree_id": 1}},
+ {"pk": 8, "model": "store.fandomhierarchy", "fields": {"rght": 12, "name": "Starters", "parent": 7, "level": 2, "lft": 11, "tree_id": 1}},
+ {"pk": 9, "model": "store.fandomhierarchy", "fields": {"rght": 17, "name": "Yellow", "parent": 1, "level": 1, "lft": 14, "tree_id": 1}},
+ {"pk": 10, "model": "store.fandomhierarchy", "fields": {"rght": 16, "name": "Starters", "parent": 9, "level": 2, "lft": 15, "tree_id": 1}},
+ {"pk": 11, "model": "store.fandomhierarchy", "fields": {"rght": 21, "name": "Diamond/Pearl", "parent": 1, "level": 1, "lft": 18, "tree_id": 1}},
+ {"pk": 12, "model": "store.fandomhierarchy", "fields": {"rght": 20, "name": "Starters", "parent": 11, "level": 2, "lft": 19, "tree_id": 1}},
+ {"pk": 13, "model": "store.fandomhierarchy", "fields": {"rght": 25, "name": "Black/White", "parent": 1, "level": 1, "lft": 22, "tree_id": 1}},
+ {"pk": 14, "model": "store.fandomhierarchy", "fields": {"rght": 24, "name": "Starters", "parent": 13, "level": 2, "lft": 23, "tree_id": 1}},
+ {"pk": 15, "model": "store.fandomhierarchy", "fields": {"rght": 27, "name": "Staff favorites", "parent": 1, "level": 1, "lft": 26, "tree_id": 1}},
+{"pk": 1, "model": "store.image", "fields": {"pixel_height": 39, "image": "source_images/tepig.png", "name": "Tepig", "pixel_width": 33, "fandoms": [14, 15]}},
+ {"pk": 2, "model": "store.image", "fields": {"pixel_height": 36, "image": "source_images/oshawatt.png", "name": "Oshawatt", "pixel_width": 29, "fandoms": [14, 15]}},
+ {"pk": 3, "model": "store.image", "fields": {"pixel_height": 37, "image": "source_images/snivy.png", "name": "Snivy", "pixel_width": 40, "fandoms": [14]}}
+]

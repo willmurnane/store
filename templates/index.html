@@ -3,16 +3,10 @@
 <head><title>Welcome to $STORE!</title></head>
 <body>
 Current filter is {{filter}}
-{% if tree %}
-{% if filter %}
-{% drilldown_tree_for_node tree as breadcrumbs %}
-{% recursetree breadcrumbs %} {% if not node.is_leaf_node %} {{ node.name }} >> {% endif %} {% endrecursetree %}
-{% endif %}
-{% endif %}
 <ul class="root">
     {% recursetree tree %}
         <li>
-            <a href="/filter/{% if filter %}{{filter}},{% endif %}fandom={{ node.id }}">{{ node.name }}</a>
+            <a href="/filter/fandom={{ node.lft }}-{{ node.rght }}">{{ node.name }} ({{ node.s }})</a>
             {% if not node.is_leaf_node %}
                 <ul class="children">
                     {{ children }}
