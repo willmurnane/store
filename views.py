@@ -32,10 +32,5 @@ def frontpage(request):
 def filtered(request, predicate):
 	items = Image.objects.all()
 	items = ApplyPredicates(predicate, items).all()
-	query1 = copy.deepcopy(connection.queries)
 	rval = render_to_response('by_category.html', {'items': items, "debug": debug_extras()})
-	query2 = copy.deepcopy(connection.queries)
-	
-	print "Query1:", query1
-	print "Query2:", query2
 	return rval
