@@ -1,13 +1,14 @@
-{% load mptt_tags %}
-<html>
-<head><title>Welcome to $STORE!</title></head>
-<body>
+{% extends "base.html" %}
+{% block title %}Search results{% endblock %}
+{% block content %}
+
+{{ items}}
 {% if items %}
 <ul>
 {% for item in items %}
-  <li>{{ item.name }} ({{ item.pixel_width }}x{{ item.pixel_height }}) {{ item.fandoms.all }}</li>
+  <li>{{ item.name }} ({{ item.pixel_width }}x{{ item.pixel_height }}) <img src="{{item.url}}" /></li>
 {% endfor %}
 </ul>
+{{ items.count }} results
 {% endif %}
-</body>
-</html>
+{% endblock %}

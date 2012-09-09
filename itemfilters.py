@@ -20,9 +20,7 @@ def byFandom(fandomIdMin, fandomIdMax):
 def ApplyPredicates(filters, items):
 	filter_list = filters.split(',')
 	for filter in filter_list:
-		print "Before", items
 		items = FindFilter(filter)(items)
-		print "After", items
 	return items
 
 
