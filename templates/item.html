@@ -1,6 +1,7 @@
-{% extends base.html %}
-{% load itemviews %}
+{% extends "base.html" %}
+
 {% block title %}{{ item.name }} {% endblock %}
 {% block content %}
-{{ item }}
+{{ item.name }}<br/>
+<img src="{{ item.image.url }}" width="{{ scale.width }}" height="{{ scale.height }}" />
 {% endblock %}

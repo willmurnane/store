@@ -10,7 +10,7 @@ def itemBlock(item, autoescape=None):
 		esc = conditional_escape
 	else:
 		esc = lambda t: t
-	result = """<div><img src="%s" /><br>%s</div>""" % (item.image.url, esc(item.name))
+	result = """<div><a href="/items/%d"><img src="%s" /><br/>%s</a></div>""" % (item.id, item.image.url, esc(item.name))
 	return mark_safe(result)
 
 itemBlock.needs_autoescape = True

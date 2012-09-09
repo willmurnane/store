@@ -13,6 +13,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
+    (r'^items/(?P<item_id>\d+)', 'store.views.item_page'),
     (r'^filter/(?P<predicate>.+)', 'store.views.filtered'),
     (r'', 'store.views.frontpage'),
 )

@@ -35,6 +35,12 @@ def filtered(request, predicate):
 	rval = render_to_response('by_category.html', {'items': items, "debug": debug_extras()})
 	return rval
 
-def item_page(request, id):
-	get_object_or_404(Image, pk=id)
-	return render_to_response('item.html', {'item': item, 'debug': debug_extras()})
+
+def findImageScaling(w, h):
+	goalWidth, goalHeight = 400, 400
+	imageScale = max(min(int(goalWidth / w), int(goalHeight / h)), 1)
+	return { "width": w * imageScale, "height": h * imageScale }
+
+def item_page(request, item_id):
+	item = get_object_or_404(Image, pk=item_id)
+	return render_to_response('item.html', {'item': item, 'scale': findImageScaling(item.pixel_width, item.pixel_height), 'debug': debug_extras()})
