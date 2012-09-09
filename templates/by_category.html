@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% load itemviews %}
 {% block title %}Search results{% endblock %}
 {% block content %}
 {% if items %}
 <ul>
 {% for item in items %}
-  <li>{{ item.name }} ({{ item.pixel_width }}x{{ item.pixel_height }}) <img src="{{item.image.url}}" /></li>
+  <li>{{ item|itemBlock }}</li>
 {% endfor %}
 </ul>
 {{ items.count }} results

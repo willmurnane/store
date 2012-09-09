@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from store.models import FandomHierarchy, Image
 from store.itemfilters import ApplyPredicates
 from django.conf import settings
@@ -34,3 +34,7 @@ def filtered(request, predicate):
 	items = ApplyPredicates(predicate, items).all()
 	rval = render_to_response('by_category.html', {'items': items, "debug": debug_extras()})
 	return rval
+
+def item_page(request, id):
+	get_object_or_404(Image, pk=id)
+	return render_to_response('item.html', {'item': item, 'debug': debug_extras()})
