@@ -6,7 +6,7 @@ def RegisterFilter(regex, func):
 	filter_router[re.compile(regex)] = func
 
 def FindFilter(filtertext):
-	print "Looking for match for \"%s\"" % filtertext
+#	print "Looking for match for \"%s\"" % filtertext
 	for regex in filter_router:
 		matches = regex.match(filtertext)
 		if matches:

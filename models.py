@@ -27,15 +27,22 @@ class Media(models.Model):
 	exterior_height = models.FloatField()
 	exterior_depth = models.FloatField()
 	stock_amount = models.IntegerField(help_text="Number currently in stock.")
+	rotateable = models.BooleanField()
 	def __unicode__(self):
 		return "%s, %d in stock" % (self.name, self.stock_amount)
-
+class RotatedMedia(Media):
+	orientation = models.CharField(max_length=10)
+	class Meta:
+		managed = False
+		db_table = u'store_rotatedmedia'
+		
 class Customer(models.Model):
 	email = models.EmailField()
 
 class OrderRow(models.Model):
 	image = models.ForeignKey(Image)
 	media = models.ForeignKey(Media)
+	rotate_media = models.BooleanField()
 	extra_text = models.CharField(max_length = 100)
 	price_cents = models.PositiveIntegerField()
 	special_instructions = models.TextField()

@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
-from store.models import FandomHierarchy, Image
+from store.models import FandomHierarchy, Image, RotatedMedia
 from store.itemfilters import ApplyPredicates
 from django.conf import settings
 import copy
@@ -43,4 +43,10 @@ def findImageScaling(w, h):
 
 def item_page(request, item_id):
 	item = get_object_or_404(Image, pk=item_id)
-	return render_to_response('item.html', {'item': item, 'scale': findImageScaling(item.pixel_width, item.pixel_height), 'debug': debug_extras()})
+	return render_to_response('item.html', 
+	{
+		'item': item,
+		'scale': findImageScaling(item.pixel_width, item.pixel_height),
+		'media': RotatedMedia.objects.all(),
+		'debug': debug_extras()
+	})
