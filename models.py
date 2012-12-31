@@ -52,3 +52,9 @@ class Order(models.Model):
 	items = models.ManyToManyField(OrderRow)
 	shippingAddress = models.TextField()
 	order_date = models.DateTimeField(auto_now=True)
+
+class ShoppingCartEntry(OrderRow):
+	pass
+class ShoppingCart(models.Model):
+	identifier = models.CharField(max_length = 40, help_text = "SHA1 sum of user data to determine which cart they own")
+	items = models.ManyToManyField(ShoppingCartEntry)
