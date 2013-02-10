@@ -29,6 +29,10 @@ def frontpage(request):
 #	print tree.query.get_compiler('default').as_sql()[0]
 	return render_to_response('index.html', {'filter': None, 'tree': tree, "debug": debug_extras()})
 
+def payment(request, result):
+	if result == "success":
+		return render_to_response('thanks.html')
+	return frontpage(request)
 def filtered(request, predicate):
 	items = Image.objects.all()
 	items = ApplyPredicates(predicate, items).all()
@@ -50,3 +54,4 @@ def item_page(request, item_id):
 		'media': RotatedMedia.objects.all(),
 		'debug': debug_extras()
 	})
+

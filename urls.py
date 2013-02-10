@@ -15,5 +15,6 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^items/(?P<item_id>\d+)', 'store.views.item_page'),
     (r'^filter/(?P<predicate>.+)', 'store.views.filtered'),
+    (r'^payment/(?P<result>.+)', 'store.views.payment'),
     (r'', 'store.views.frontpage'),
 )
