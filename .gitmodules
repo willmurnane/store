@@ -1,3 +1,0 @@
-[submodule "cart"]
-	path = cart
-	url = https://github.com/bmentges/django-cart.git
