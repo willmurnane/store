@@ -16,8 +16,10 @@ ix = create_in(index_path, schema)
 
 writer = ix.writer()
 for item in store.models.Image.objects.all():
-	fandom_string = ", ".join(map(lambda f: f.name, item.fandoms.all()))
+	print item.name
+	fandom_string = item.name + ": " + ", ".join(map(lambda f: f.name, item.fandoms.all()))
 	writer.add_document(title=item.name, path=unicode("/items/%d" % item.id), content=unicode(fandom_string))
+
 for item in store.models.FandomHierarchy.objects.all():
 	writer.add_document(title=item.name, path=unicode("/filter/fandom=%d-%d" % (item.lft, item.rght)), content=item.name)
 writer.commit()
