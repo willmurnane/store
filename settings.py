@@ -121,3 +121,25 @@ INSTALLED_APPS = (
     'mptt',
     'whoosh',
 )
+
+def debug_extras(): return ""
+if False: # settings.DEBUG:
+	def real_debug():
+		return connection.queries
+	debug_extras = real_debug
+
+from forms import SearchForm
+def addExtraStuff(request):
+	return {
+		"debug": debug_extras(),
+		"search": SearchForm(),
+	}
+
+TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
+"django.core.context_processors.debug",
+"django.core.context_processors.i18n",
+"django.core.context_processors.media",
+"django.core.context_processors.static",
+"django.core.context_processors.tz",
+"django.contrib.messages.context_processors.messages", "settings.addExtraStuff")
+

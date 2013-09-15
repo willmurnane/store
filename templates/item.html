@@ -5,7 +5,12 @@
 {% block content %}
 {{ item.name }}<br/>
 <img class="pixelated" src="{{ item.image.url }}" width="{{ scale.width }}" height="{{ scale.height }}" />
-{% for medium in media %}
-{{ medium|mediadisplay:"media_type" }}
-{% endfor %}
+{% if media %}
+	{% for medium in media %}
+		{{ medium }} hello
+		{{ medium|mediadisplay:"media_type" }}
+	{% endfor %}
+{% else }
+No media options found!
+{% endif %}
 {% endblock %}

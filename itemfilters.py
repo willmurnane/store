@@ -1,4 +1,5 @@
 import re
+from store.models import FandomHierarchy
 
 filter_router = {}
 
@@ -14,14 +15,17 @@ def FindFilter(filtertext):
 	raise "Couldn't find filter matching \"%s\"" % filtertext
 
 def byFandom(fandomIdMin, fandomIdMax):
-	return lambda(nodes): nodes.filter(fandoms__lft__gte=fandomIdMin, fandoms__rght__lte=fandomIdMax).distinct()
+	return lambda(nodes): ((nodes.filter(fandoms__lft__gte=fandomIdMin, fandoms__rght__lte=fandomIdMax).distinct()),
+		FandomHierarchy.objects.get(lft=fandomIdMin).get_ancestors(include_self=True))
 
 """Select a subset of items based on the filter described by filters"""
 def ApplyPredicates(filters, items):
 	filter_list = filters.split(',')
 	for filter in filter_list:
-		items = FindFilter(filter)(items)
-	return items
+		foo = FindFilter(filter)
+		print foo
+		items, path = foo(items)
+	return items, path
 
 
 RegisterFilter("^fandom=(?P<fandomIdMin>\d+)-(?P<fandomIdMax>\d+)", byFandom)
