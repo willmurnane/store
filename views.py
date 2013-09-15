@@ -38,6 +38,9 @@ def filtered(request, predicate):
 	bc = [[{'url': '/', 'text': 'Home'}]]
 	for crumb in path:
 		bc[0].append({'url': '/filter/fandom=%d-%d' % (crumb.lft, crumb.rght), 'text': crumb.name})
+	children = path.reverse()[0].get_children()
+	for crumb in children:
+		bc.append([{'url': '/filter/fandom=%d-%d' % (crumb.lft, crumb.rght), 'text': crumb.name}])
 	return {'items': items, 'breadcrumbs': bc}
 
 

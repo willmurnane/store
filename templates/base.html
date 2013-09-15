@@ -11,7 +11,7 @@
 	{% for entry in row %}
 		{% if not forloop.first %} > {% endif %}
 		<a href="{{ entry.url }}">{{ entry.text }}</a>
-	{% endfor %}
+	{% endfor %}<br/>
 {% endfor %}
 {% else %}<a href="/">Home</a>{% endif %}{% endblock %}
 <form action="/search" method="GET">{{ search }}<input type="submit" value="Go" /></form>

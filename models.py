@@ -8,7 +8,7 @@ class FandomHierarchy(MPTTModel):
 		ancs = [x.name for x in self.get_ancestors(include_self=True)]
 		return ancs
 	def _get_full_name(self):
-		return u" \u00BB ".join(_get_path())
+		return u" \u00BB ".join(self._get_path())
 	fullName = property(_get_full_name)
 	path = property(_get_path)
 	def __unicode__(self):
