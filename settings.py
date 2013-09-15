@@ -115,4 +115,5 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'store',
     'mptt',
+    'whoosh',
 )
