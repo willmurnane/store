@@ -5,6 +5,10 @@
 <title>{% block title %}UNDEFINED PAGE TITLE{% endblock %}</title>
 </head>
 <body>
+<form action="/search" method="GET">
+Search: 
+{{ search.as_p }}
+</form>
 {% block content %} {% endblock %}
 </body>
 </html>

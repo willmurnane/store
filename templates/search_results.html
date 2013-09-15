@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{ results|length }} search results for {{ query }} {% endblock %}
+{% block content %}
+{% if results %}
+	{{ results|length }} results for "{{ query }}".
+	<ul>
+	{% for result in results %}
+		<li> <a href="{{ result.path }}">
+		{% if "title" in result.highlights %}
+			{{ result.highlights.title|safe }}
+		{% else %}
+			{{ result.name }}
+		{% endif %}
+		</a> {{result.highlights|safe}} </li>
+	{% endfor %}
+{% else %}
+No results for "{{query}}" found.
+{% endif %}
+{% endblock content %}

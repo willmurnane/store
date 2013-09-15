@@ -2,9 +2,11 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from store.models import FandomHierarchy, Image, RotatedMedia
 from store.itemfilters import ApplyPredicates
+from store.forms import SearchForm
 from django.conf import settings
 import copy
 from django.db import connection
+from store.search import doSearch
 
 def debug_extras(): return ""
 if False: # settings.DEBUG:
@@ -27,7 +29,9 @@ def frontpage(request):
 		})
 	
 #	print tree.query.get_compiler('default').as_sql()[0]
-	return render_to_response('index.html', {'filter': None, 'tree': tree, "debug": debug_extras()})
+	return render_to_response('index.html', {'tree': tree,
+		'debug': debug_extras(),
+		'search': SearchForm()})
 
 def payment(request, result):
 	if result == "success":
@@ -55,3 +59,15 @@ def item_page(request, item_id):
 		'debug': debug_extras()
 	})
 
+def search_results(request):
+	if request.method == 'GET':
+		form = SearchForm(request.GET)
+		if form.is_valid():
+			results = doSearch(form.cleaned_data['query'])
+			print results
+			return render_to_response('search_results.html',
+			{
+				'query': form.cleaned_data['query'],
+				'results': results,
+			})
+	return render_to_response('search_results.html')
