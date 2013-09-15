@@ -19,7 +19,6 @@ def doSearch(query):
 		my_query = Or([Variations("content", unicode(query)), Variations("title", unicode(query)), Variations("tags", unicode(query))])
 		results = s.search(my_query, terms=True)
 		rval = []
-		print results.matched_terms()
 		for item in results:
 			rval.append(SearchResult(
 				item.fields()['title'],
