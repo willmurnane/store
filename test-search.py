@@ -11,13 +11,12 @@ from whoosh.qparser import QueryParser
 index_path = "index"
 
 ix = open_dir(index_path)
+query = sys.argv[1]
 print sys.argv[1:]
 
 with ix.searcher() as s:
-	for fields in s.all_stored_fields():
-		print fields
 #	terms = map(lambda w: Or([Term("content", unicode(w)), Term("title", unicode(w))]), sys.argv[1:])
-	my_query = Term("content", unicode(sys.argv[1]))
+	my_query = Or([Variations("content", unicode(query)), Variations("title", unicode(query))])
 #	qp = QueryParser("title", schema = ix.schema)
 #	search = unicode(" ".join(sys.argv[1:]))
 #	print search

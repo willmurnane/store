@@ -12,7 +12,12 @@
 		{% else %}
 			{{ result.name }}
 		{% endif %}
-		</a> {{result.highlights|safe}} </li>
+		</a>
+		{% for k, h in result.highlights.items %}
+			{% if k != "title" %}
+				{{k}}: {{ h|safe }}
+			{% endif %}
+		{% endfor %} </li>
 	{% endfor %}
 {% else %}
 No results for "{{query}}" found.

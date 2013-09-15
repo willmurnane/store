@@ -60,10 +60,14 @@ USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
+index_path = "./index"
+
 if socket.gethostname() == "force":
 	MEDIA_ROOT = '/home/willm1/store.twoevils.net/public/media'
+	index_path = "./store/index"
 else:
 	MEDIA_ROOT = os.path.abspath('./media')
+	index_path = "./index"
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).

@@ -4,7 +4,13 @@ from mptt.models import MPTTModel, TreeForeignKey
 class FandomHierarchy(MPTTModel):
 	name = models.CharField(max_length=100)
 	parent = TreeForeignKey('self', null=True, related_name='children')
+	def _get_full_name(self):
+		ancs = [x.name for x in self.get_ancestors()]
+		ancs.append(self.name)
+		return u" \u00BB ".join(ancs)
+	fullName = property(_get_full_name)
 	def __unicode__(self):
+		print dir(self)
 		return "|%s%s" % (" " * self.level, self.name)
 
 class Image(models.Model):
