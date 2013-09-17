@@ -5,12 +5,5 @@
 {% block content %}
 {{ item.name }}<br/>
 <img class="pixelated" src="{{ item.image.url }}" width="{{ scale.width }}" height="{{ scale.height }}" />
-{% if media %}
-	{% for medium in media %}
-		{{ medium }} hello
-		{{ medium|mediadisplay:"media_type" }}
-	{% endfor %}
-{% else }
-No media options found!
-{% endif %}
+{{ carthelper.addButton }}
 {% endblock %}

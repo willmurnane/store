@@ -18,4 +18,10 @@
 {% block content %} {% endblock %}
 </body>
 </html>
-{{ debug }}
+{% if debug %}
+<table>
+{% for row in debug %}
+<tr><td>{{ row.time }}</td><td>{{ row.sql }}</td></tr>
+{% endfor %}
+</table>
+{% endif %}

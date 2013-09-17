@@ -7,7 +7,7 @@ import copy
 from django.db import connection
 from store.search import doSearch
 from decorators import render_to
-from forms import SearchForm
+from forms import SearchForm, ItemForm
 
 @render_to('index.html')
 def frontpage(request):
@@ -57,6 +57,7 @@ def item_page(request, item_id):
 		'scale': findImageScaling(item.pixel_width, item.pixel_height),
 		'media': RotatedMedia.objects.all(),
 		'breadcrumbs': [[{'url': '/', 'text': 'Home'}]],
+		'carthelper': ItemForm(item_id=item_id),
 	}
 
 @render_to('search_results.html')
@@ -70,3 +71,6 @@ def search_results(request):
 				'results': results,
 			}
 	return {}
+
+def add_to_cart(request):
+	pass

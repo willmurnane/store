@@ -122,14 +122,15 @@ INSTALLED_APPS = (
     'whoosh',
 )
 
-def debug_extras(): return ""
-if False: # settings.DEBUG:
+def debug_extras(): return {}
+if DEBUG:
 	def real_debug():
+		from django.db import connection
 		return connection.queries
 	debug_extras = real_debug
 
-from forms import SearchForm
 def addExtraStuff(request):
+	from forms import SearchForm
 	return {
 		"debug": debug_extras(),
 		"search": SearchForm(),
