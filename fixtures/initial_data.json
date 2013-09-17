@@ -14,5 +14,7 @@
  {"pk": 15, "model": "store.fandomhierarchy", "fields": {"rght": 27, "name": "Staff favorites", "parent": 1, "level": 1, "lft": 26, "tree_id": 1}},
 {"pk": 1, "model": "store.image", "fields": {"pixel_height": 39, "image": "source_images/tepig.png", "name": "Tepig", "pixel_width": 33, "fandoms": [14, 15]}},
  {"pk": 2, "model": "store.image", "fields": {"pixel_height": 36, "image": "source_images/oshawatt.png", "name": "Oshawatt", "pixel_width": 29, "fandoms": [14, 15]}},
- {"pk": 3, "model": "store.image", "fields": {"pixel_height": 37, "image": "source_images/snivy.png", "name": "Snivy", "pixel_width": 40, "fandoms": [14]}}
+ {"pk": 3, "model": "store.image", "fields": {"pixel_height": 37, "image": "source_images/snivy.png", "name": "Snivy", "pixel_width": 40, "fandoms": [14]}},
+{"pk": 1,"model": "store.media","fields": {"price_cents": 1100,"weight_oz": 5.5,"exterior_depth": 0.80000000000000004,"stock_amount": 3,"rotateable": true,"visible_height": 5.2000000000000002,"exterior_width": 4.0999999999999996,"exterior_height": 6.2000000000000002,"cost_cents": 699,"visible_width": 3.5,"name": "4x6 Frame"}},
+ {"pk": 2,"model": "store.media","fields": {"price_cents": 700,"weight_oz": 5.0, "exterior_depth": 0.45000000000000001, "stock_amount": 4, "rotateable": false, "visible_height": 2.75, "exterior_width": 3.5, "exterior_height": 3.5, "cost_cents": 499, "visible_width": 2.75, "name": "Coaster"}}
 ]
