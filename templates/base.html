@@ -14,7 +14,8 @@
 	{% endfor %}<br/>
 {% endfor %}
 {% else %}<a href="/">Home</a>{% endif %}{% endblock %}
-<form action="/search" method="GET">{{ search }}<input type="submit" value="Go" /></form>
+<a href="{% url 'show_cart' %}">View Cart</a>
+<form action="{% url 'search' %}" method="GET">{{ search }}<input type="submit" value="Go" /></form>
 {% block content %} {% endblock %}
 </body>
 </html>

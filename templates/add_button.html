@@ -1,0 +1,4 @@
+<form method='POST' action="{% url 'add_to_cart' %}">{% csrf_token %}
+{{ item.as_ul }}
+<input type="submit" value="Add to Cart" />
+</form>

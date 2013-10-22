@@ -7,8 +7,8 @@ PROJECT_ROOT = os.path.dirname(__file__)
 sys.path.insert(0, PROJECT_ROOT)
 sys.path.insert(0, os.path.join(PROJECT_ROOT, "apps"))
 
-DEBUG = False
-TEMPLATE_DEBUG = DEBUG
+DEBUG = True
+TEMPLATE_DEBUG = True
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
@@ -142,3 +142,4 @@ TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
 "django.core.context_processors.media",
 "django.contrib.messages.context_processors.messages", "settings.addExtraStuff")
 
+ALLOWED_HOSTS = ['localhost', 'store.twoevils.net', 'gotta-stitch-em-all.com']

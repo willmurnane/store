@@ -5,7 +5,7 @@
 {% if items %}
 <ul>
 {% for item in items %}
-  <li>{{ item|itemBlock }}</li>
+  <li>{% small_block item %}</li>
 {% endfor %}
 </ul>
 {{ items.count }} results

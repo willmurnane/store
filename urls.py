@@ -13,9 +13,12 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
-    (r'^items/(?P<item_id>\d+)', 'store.views.item_page'),
+    url(r'^items/(?P<item_id>\d+)', 'store.views.item_page', name='item_page'),
     (r'^filter/(?P<predicate>.+)', 'store.views.filtered'),
     (r'^payment/(?P<result>.+)', 'store.views.payment'),
-    (r'^search', 'store.views.search_results'),
+    url(r'^search', 'store.views.search_results', name='search'),
+    url(r'^cart/add', 'store.views.add_to_cart', name='add_to_cart'),
+    url(r'^cart/show', 'store.views.show_cart', name='show_cart'),
+    url(r'^cart/remove/(?P<item_id>\d+)', 'store.views.remove_from_cart', name='remove_from_cart'),
     (r'', 'store.views.frontpage'),
 )

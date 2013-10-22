@@ -5,5 +5,5 @@
 {% block content %}
 {{ item.name }}<br/>
 <img class="pixelated" src="{{ item.image.url }}" width="{{ scale.width }}" height="{{ scale.height }}" />
-{{ carthelper.addButton }}
+{% add_button carthelper %}
 {% endblock %}

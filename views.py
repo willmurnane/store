@@ -1,6 +1,6 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
-from store.models import FandomHierarchy, Image, RotatedMedia
+from store.models import FandomHierarchy, Image, RotatedMedia, Item, ImageItem
 from store.itemfilters import ApplyPredicates
 from django.conf import settings
 import copy
@@ -8,6 +8,8 @@ from django.db import connection
 from store.search import doSearch
 from decorators import render_to
 from forms import SearchForm, ItemForm
+from cart import Cart
+from django.core.urlresolvers import reverse
 
 @render_to('index.html')
 def frontpage(request):
@@ -73,4 +75,29 @@ def search_results(request):
 	return {}
 
 def add_to_cart(request):
-	pass
+	form = ItemForm(request.POST or None)
+	if form.is_valid():
+		cart = Cart(request)
+		row = ImageItem(
+			image=form.cleaned_data['item_id'],
+			media=form.cleaned_data['media_option'],
+			extra_text='',
+			special_instructions=''
+			)
+		row.save()
+		cart.add(row, form.cleaned_data['media_option'].price_cents / 100, 1)
+	else:
+		print "Invalid form!"
+		print request
+		print dir(request)
+	return HttpResponseRedirect(reverse('show_cart'))
+
+def remove_from_cart(request, item_id):
+	cart = Cart(request)
+	item = Item.objects.get(pk=item_id, cart=cart.cart)
+	if item: item.delete()
+	return HttpResponseRedirect(reverse('show_cart'))
+
+@render_to('cart.html')
+def show_cart(request):
+	return { 'cart': Cart(request) }

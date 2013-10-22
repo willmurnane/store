@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load itemviews %}
+
+{% block title %}Cart{% endblock %}
+{% block content %}
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Remove from Cart</th>
+        </tr>
+        {% for item in cart %}
+        <tr>
+            <td>{{ item.product }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.total_price }}</td>
+            <td><a href="{% url 'remove_from_cart' item.id %}">Remove</a>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
