@@ -1,5 +1,5 @@
 import datetime
-import models
+import store.models
 
 CART_ID = 'CART-ID'
 

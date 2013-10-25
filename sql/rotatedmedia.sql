@@ -12,6 +12,4 @@ store_media.visible_width as vh,
 store_media.visible_height + 1 as vw,
 'Landscape' as orientation
 FROM store_media
-WHERE rotateable) ORDER BY name, orientation;
-
-select * from store_rotatedmedia;
+WHERE rotateable) as media ORDER BY name, orientation;

@@ -7,7 +7,6 @@ PROJECT_ROOT = os.path.dirname(__file__)
 sys.path.insert(0, PROJECT_ROOT)
 sys.path.insert(0, os.path.join(PROJECT_ROOT, "apps"))
 
-DEBUG = True
 TEMPLATE_DEBUG = True
 
 ADMINS = (
@@ -16,18 +15,20 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-if socket.gethostname() == "force":
+if socket.gethostname() == "gottastitchemall":
+  DEBUG = False
   DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'django_store',                      # Or path to database file if using sqlite3.
-        'USER': 'django_store',                      # Not used with sqlite3.
-        'PASSWORD': 'insecure!',                  # Not used with sqlite3.
-        'HOST': 'mysql.twoevils.net',                      # Set to empty string for localhost. Not used with sqlite3.
+        'USER': 'app_runner',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
   }
 else:
+  DEBUG = False
   DATABASES = {
     'default': {
 	'ENGINE': 'django.db.backends.sqlite3',

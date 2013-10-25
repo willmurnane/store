@@ -1,3 +1,6 @@
 [submodule "apps/django-mptt"]
 	path = apps/django-mptt
 	url = https://github.com/django-mptt/django-mptt.git
+[submodule "apps/cart"]
+	path = apps/cart
+	url = https://github.com/bmentges/django-cart.git
