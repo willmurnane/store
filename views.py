@@ -87,9 +87,9 @@ def add_to_cart(request):
 		row.save()
 		cart.add(row, form.cleaned_data['media_option'].price_cents / 100, 1)
 	else:
-		print "Invalid form!"
-		print request
-		print dir(request)
+		print("Invalid form!")
+		print(request)
+		print(dir(request))
 	return HttpResponseRedirect(reverse('show_cart'))
 
 def remove_from_cart(request, item_id):

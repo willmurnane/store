@@ -32,7 +32,7 @@ class Cart:
 		return cart
 
 	def add(self, product, unit_price, quantity=1):
-		print "Adding %s at quantity %s: total %s" % (product, unit_price, quantity)
+		print("Adding %s at quantity %s: total %s" % (product, unit_price, quantity))
 		try:
 			item = models.Item.objects.get(
 				cart=self.cart,

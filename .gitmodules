@@ -1,0 +1,3 @@
+[submodule "apps/django-mptt"]
+	path = apps/django-mptt
+	url = https://github.com/django-mptt/django-mptt.git
