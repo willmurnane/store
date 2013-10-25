@@ -12,7 +12,7 @@ class FandomHierarchy(MPTTModel):
 		ancs = [x.name for x in self.get_ancestors(include_self=True)]
 		return ancs
 	def _get_full_name(self):
-		return u" \u00BB ".join(self._get_path())
+		return " \u00BB ".join(self._get_path())
 	fullName = property(_get_full_name)
 	path = property(_get_path)
 	def __unicode__(self):
@@ -48,7 +48,7 @@ class RotatedMedia(Media):
 		return "%s oriented %s, %d in stock" % (self.name, self.orientation, self.stock_amount)
 	class Meta:
 		managed = False
-		db_table = u'store_rotatedmedia'
+		db_table = 'store_rotatedmedia'
 
 class Customer(models.Model):
 	email = models.EmailField()
@@ -91,7 +91,7 @@ class Item(models.Model):
 		ordering = ('cart',)
 
 	def __unicode__(self):
-		return u'%d units of %s' % (self.quantity, self.product.__class__.__name__)
+		return '%d units of %s' % (self.quantity, self.product.__class__.__name__)
 
 	def total_price(self):
 		return self.quantity * self.unit_price
@@ -104,10 +104,10 @@ class Item(models.Model):
 	def set_product(self, product):
 		self.content_type = ContentType.objects.get_for_model(type(product))
 		self.object_id = product.pk
-		print "Setting product to %s; pk=%s; content_type=%s" % (product, product.pk, self.content_type)
-		print dir(self.content_type)
-		print self.content_type.pk
-		print self.content_type.id
+		print("Setting product to %s; pk=%s; content_type=%s" % (product, product.pk, self.content_type))
+		print(dir(self.content_type))
+		print(self.content_type.pk)
+		print(self.content_type.id)
 		
 	product = property(get_product, set_product)
 
