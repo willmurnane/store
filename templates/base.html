@@ -5,6 +5,7 @@
 <title>{% block title %}UNDEFINED PAGE TITLE{% endblock %}</title>
 </head>
 <body>
+<div id="header" style="background-color: red;">
 {% block breadcrumbs %}
 {% if breadcrumbs %}
 {% for row in breadcrumbs %}
@@ -16,7 +17,30 @@
 {% else %}<a href="/">Home</a>{% endif %}{% endblock %}
 <a href="{% url 'show_cart' %}">View Cart</a>
 <form action="{% url 'search' %}" method="GET">{{ search }}<input type="submit" value="Go" /></form>
+</div>
+<div class="colmask leftmenu">
+  <div class="colleft">
+    <div class="col1"> one
 {% block content %} {% endblock %}
+</div>
+    <div class="col2">{% block sidebar %}
+Sidebar
+<ul class="root">
+    {% recursetree tree %}
+        <li>
+            <a href="/filter/fandom={{ node.lft }}-{{ node.rght }}">{{ node.name }} ({{ node.sub_images }})</a>
+            {% if not node.is_leaf_node %}
+                <ul class="children">
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+</ul>
+{% endblock %}</div>
+  </div>
+</div>
+
 </body>
 </html>
 {% if debug %}

@@ -132,8 +132,21 @@ if DEBUG:
 
 def addExtraStuff(request):
 	from forms import SearchForm
+	import store.models
+	tree = store.models.FandomHierarchy.objects.extra(select={"sub_images": """
+                        SELECT COUNT(DISTINCT %(join_table_fk1_name)s) from %(join_table)s WHERE %(join_table_fk2_name)s in (
+                                SELECT id FROM %(data_table)s m2 where m2.tree_id = %(data_table)s.tree_id
+                                                                   and m2.lft between %(data_table)s.lft and %(data_table)s.rght
+                        )
+                """ % {"data_table": "store_fandomhierarchy",
+                       "join_table": "store_image_fandoms",
+                       "join_table_fk1_name": "image_id",
+                       "join_table_fk2_name": "fandomhierarchy_id",
+                       }
+                })
 	return {
 		"debug": debug_extras(),
+		"tree": tree,
 		"search": SearchForm(),
 	}
 

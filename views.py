@@ -14,20 +14,7 @@ from django.core.urlresolvers import reverse
 @render_to('index.html')
 def frontpage(request):
 	# add_related_count(FandomHierarchy.objects.all(), Image, 'foo', 'sub_images', cumulative=True)
-	tree = FandomHierarchy.objects.extra(select={"sub_images": """
-			SELECT COUNT(DISTINCT %(join_table_fk1_name)s) from %(join_table)s WHERE %(join_table_fk2_name)s in (
-				SELECT id FROM %(data_table)s m2 where m2.tree_id = %(data_table)s.tree_id
-				                                   and m2.lft between %(data_table)s.lft and %(data_table)s.rght
-			)
-		""" % {"data_table": "store_fandomhierarchy",
-		       "join_table": "store_image_fandoms",
-		       "join_table_fk1_name": "image_id",
-		       "join_table_fk2_name": "fandomhierarchy_id",
-		       }
-		})
-	
-#	print tree.query.get_compiler('default').as_sql()[0]
-	return {'tree': tree, 'breadcrumbs': [[{'url': '/', 'text': 'Home'}]]}
+	return {'breadcrumbs': [[{'url': '/', 'text': 'Home'}]]}
 
 def payment(request, result):
 	if result == "success":
