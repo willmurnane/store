@@ -12,20 +12,24 @@ class FandomHierarchy(MPTTModel):
 		ancs = [x.name for x in self.get_ancestors(include_self=True)]
 		return ancs
 	def _get_full_name(self):
-		return " \u00BB ".join(self._get_path())
+		return " &rsquo; ".join(self._get_path())
 	fullName = property(_get_full_name)
 	path = property(_get_path)
 	def __unicode__(self):
 		return "|%s%s" % (" " * self.level, self.name)
 
 class Image(models.Model):
-	pixel_width = models.PositiveIntegerField()
-	pixel_height = models.PositiveIntegerField()
 	name = models.CharField(max_length=100)
 	fandoms = models.ManyToManyField(FandomHierarchy)
-	image = models.ImageField(upload_to='source_images')
 	def __unicode__(self):
 		return "%s (%dx%d)" % (self.name, self.pixel_width, self.pixel_height)
+
+class Pattern(models.Model):
+	pixel_width = models.PositiveIntegerField()
+	pixel_height = models.PositiveIntegerField()
+	image = models.ImageField(upload_to='source_images')
+	fandoms = models.ManyToManyField(FandomHierarchy)
+	patternof = models.ForeignKey(Image)
 
 class Media(models.Model):
 	name = models.CharField(max_length=100)
@@ -112,12 +116,12 @@ class Item(models.Model):
 	product = property(get_product, set_product)
 
 class ImageItem(models.Model):
-	image = models.ForeignKey(Image)
+	pattern = models.ForeignKey(Pattern)
 	media = models.ForeignKey(RotatedMedia)
 	extra_text = models.CharField(max_length = 100)
 	special_instructions = models.TextField()
 	def __unicode__(self):
-		return "%s in %s" % (self.image, self.media)
+		return "%s in %s" % (self.pattern, self.media)
 
 class Order(models.Model):
 	customer = models.ForeignKey(Customer)

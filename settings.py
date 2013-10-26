@@ -28,7 +28,7 @@ if socket.gethostname() == "gottastitchemall":
     }
   }
 else:
-  DEBUG = False
+  DEBUG = True
   DATABASES = {
     'default': {
 	'ENGINE': 'django.db.backends.sqlite3',
@@ -63,8 +63,8 @@ USE_L10N = True
 # Example: "/home/media/media.lawrence.com/"
 index_path = "./index"
 
-if socket.gethostname() == "force":
-	MEDIA_ROOT = '/home/willm1/store.twoevils.net/public/media'
+if socket.gethostname() == "gottastitchemall":
+	MEDIA_ROOT = '/web/static/media'
 	index_path = "./store/index"
 else:
 	MEDIA_ROOT = os.path.abspath('./media')
@@ -134,16 +134,11 @@ def addExtraStuff(request):
 	from forms import SearchForm
 	import store.models
 	tree = store.models.FandomHierarchy.objects.extra(select={"sub_images": """
-                        SELECT COUNT(DISTINCT %(join_table_fk1_name)s) from %(join_table)s WHERE %(join_table_fk2_name)s in (
-                                SELECT id FROM %(data_table)s m2 where m2.tree_id = %(data_table)s.tree_id
-                                                                   and m2.lft between %(data_table)s.lft and %(data_table)s.rght
-                        )
-                """ % {"data_table": "store_fandomhierarchy",
-                       "join_table": "store_image_fandoms",
-                       "join_table_fk1_name": "image_id",
-                       "join_table_fk2_name": "fandomhierarchy_id",
-                       }
-                })
+                        SELECT COUNT(DISTINCT pattern_id) from store_pattern_fandoms
+                        WHERE fandomhierarchy_id in (
+                                SELECT id FROM store_fandomhierarchy m2 where m2.tree_id = store_fandomhierarchy.tree_id
+                                                                   and m2.lft between store_fandomhierarchy.lft and store_fandomhierarchy.rght)
+                """})
 	return {
 		"debug": debug_extras(),
 		"tree": tree,
