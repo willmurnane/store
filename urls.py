@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    (r'^admin/', include(admin.site.urls)),
+    (r'^admin', include(admin.site.urls)),
     url(r'^items/(?P<item_id>\d+)', 'store.views.item_page', name='item_page'),
     (r'^filter/(?P<predicate>.+)', 'store.views.filtered'),
     (r'^payment/(?P<result>.+)', 'store.views.payment'),
