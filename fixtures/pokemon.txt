@@ -672,3 +672,72 @@
 #154	 #648	648	Meloetta	Normal	Psychic
 #154	 #648	648P	Meloetta	Normal	Fighting
 #155	 #649	649	Genesect	Bug	Steel
+#001	 #650	650	Chespin	Grass
+#002	 #651	651	Quilladin	Grass
+#003	 #652	652	Chesnaught	Grass	Fighting
+#004	 #653	653	Fennekin	Fire
+#005	 #654	654	Braixen	Fire
+#006	 #655	655	Delphox	Fire	Psychic
+#007	 #656	656	Froakie	Water
+#008	 #657	657	Frogadier	Water
+#009	 #658	658	Greninja	Water	Dark
+#010	 #659	659	Bunnelby	Normal
+#011	 #660	660	Diggersby	Normal	Ground
+#014	 #661	661	Fletchling	Normal	Flying
+#015	 #662	662	Fletchinder	Fire	Flying
+#016	 #663	663	Talonflame	Fire	Flying
+#020	 #664	664	Scatterbug	Bug
+#021	 #665	665	Spewpa	Bug
+#022	 #666	666	Vivillon	Bug	Flying
+#057	 #667	667	Litleo	Fire	Normal
+#058	 #668	668	Pyroar	Fire	Normal
+#068	 #669	669	Flabébé	Fairy
+#069	 #670	670	Floette	Fairy
+#070	 #671	671	Florges	Fairy
+#089	 #672	672	Skiddo	Grass
+#090	 #673	673	Gogoat	Grass
+#091	 #674	674	Pancham	Fighting
+#092	 #675	675	Pangoro	Fighting	Dark
+#093	 #676	676	Furfrou	Normal
+#114	 #677	677	Espurr	Psychic
+#115	 #678	678	Meowstic	Psychic
+#117	 #679	679	Honedge	Steel	Ghost
+#118	 #680	680	Doublade	Steel	Ghost
+#119	 #681	681	Aegislash	Steel	Ghost
+#129	 #682	682	Spritzee	Fairy
+#130	 #683	683	Aromatisse	Fairy
+#131	 #684	684	Swirlix	Fairy
+#132	 #685	685	Slurpuff	Fairy
+#010	 #686	686	Inkay	Dark	Psychic
+#011	 #687	687	Malamar	Dark	Psychic
+#021	 #688	688	Binacle	Rock	Water
+#022	 #689	689	Barbaracle	Rock	Water
+#030	 #690	690	Skrelp	Poison	Water
+#031	 #691	691	Dragalge	Poison	Dragon
+#032	 #692	692	Clauncher	Water
+#033	 #693	693	Clawitzer	Water
+#046	 #694	694	Helioptile	Electric	Normal
+#047	 #695	695	Heliolisk	Electric	Normal
+#064	 #696	696	Tyrunt	Rock	Dragon
+#065	 #697	697	Tyrantrum	Rock	Dragon
+#066	 #698	698	Amaura	Rock	Ice
+#067	 #699	699	Aurorus	Rock	Ice
+#085	 #700	700	Sylveon	Fairy
+#089	 #701	701	Hawlucha	Fighting	Flying
+#110	 #702	702	Dedenne	Electric	Fairy
+#124	 #703	703	Carbink	Rock	Fairy
+#019	 #704	704	Goomy	Dragon
+#020	 #705	705	Sliggoo	Dragon
+#021	 #706	706	Goodra	Dragon
+#050	 #707	707	Klefki	Steel	Fairy
+#061	 #708	708	Phantump	Ghost	Grass
+#062	 #709	709	Trevenant	Ghost	Grass
+#063	 #710	710	Pumpkaboo	Ghost	Grass
+#064	 #711	711	Gourgeist	Ghost	Grass
+#079	 #712	712	Bergmite	Ice
+#080	 #713	713	Avalugg	Ice
+#113	 #714	714	Noibat	Flying	Dragon
+#114	 #715	715	Noivern	Flying	Dragon
+#148	 #716	716	Xerneas	Fairy
+#149	 #717	717	Yveltal	Dark	Flying
+#150	 #718	718	Zygarde	Dragon	Ground

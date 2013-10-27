@@ -3,11 +3,11 @@
 {% block title %}Search results{% endblock %}
 {% block content %}
 {% if patterns %}
-<ul>
+<div style="clear: both;">
 {% for item in patterns %}
-  <li>{% small_block item %}</li>
+  {% small_block item %}
 {% endfor %}
-</ul>
+</div>
 {% if patterns.has_previous %}<a href="?page={{ patterns.previous_page_number }}">Previous</a>{% endif %}
 {% if patterns.has_next %}<a href="?page={{ patterns.next_page_number }}">Next</a>{% endif %}
 {% endif %}
