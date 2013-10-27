@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load itemviews %}
+
+{% block title %}{{ pattern.patternof.name }} {% endblock %}
+{% block content %}
+{{ pattern.patternof.name }}<br/>
+<img class="pixelated" src="{{ pattern.image.url }}" width="{{ scale.width }}" height="{{ scale.height }}" />
+{% add_button carthelper %}
+{% endblock %}

@@ -2,12 +2,13 @@
 {% load itemviews %}
 {% block title %}Search results{% endblock %}
 {% block content %}
-{% if items %}
+{% if patterns %}
 <ul>
-{% for item in items %}
+{% for item in patterns %}
   <li>{% small_block item %}</li>
 {% endfor %}
 </ul>
-{{ items.count }} results
+{% if patterns.has_previous %}<a href="?page={{ patterns.previous_page_number }}">Previous</a>{% endif %}
+{% if patterns.has_next %}<a href="?page={{ patterns.next_page_number }}">Next</a>{% endif %}
 {% endif %}
 {% endblock %}

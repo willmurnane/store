@@ -1,3 +1,4 @@
+import logging
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from store.models import FandomHierarchy, Image, Media, Pattern, Item, ImageItem
@@ -10,6 +11,7 @@ from decorators import render_to
 from forms import SearchForm, ItemForm
 from cart import Cart
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 @render_to('index.html')
 def frontpage(request):
@@ -30,6 +32,14 @@ def filtered(request, predicate):
 	children = path.reverse()[0].get_children()
 	for crumb in children:
 		bc.append([{'url': '/filter/fandom=%d-%d' % (crumb.lft, crumb.rght), 'text': crumb.name}])
+	page = request.GET.get('page')
+	p = Paginator(patterns, 10)
+	try:
+		patterns = p.page(page)
+	except PageNotAnInteger:
+		patterns = p.page(1)
+	except EmptyPage:
+		patterns = p.page(p.num_pages)
 	return {'patterns': patterns, 'breadcrumbs': bc}
 
 
@@ -40,13 +50,13 @@ def findImageScaling(w, h):
 
 @render_to('pattern.html')
 def pattern_page(request, pattern_id):
-	item = get_object_or_404(Pattern, pk=item_id)
+	pattern = get_object_or_404(Pattern, pk=pattern_id)
 	return {
-		'item': item,
-		'scale': findImageScaling(item.pixel_width, item.pixel_height),
+		'pattern': pattern,
+		'scale': findImageScaling(pattern.pixel_width, pattern.pixel_height),
 		'media': Media.objects.all(),
 		'breadcrumbs': [[{'url': '/', 'text': 'Home'}]],
-		'carthelper': ItemForm(item_id=item_id),
+		'carthelper': ItemForm(item_id=pattern_id),
 	}
 
 @render_to('search_results.html')
@@ -66,7 +76,7 @@ def add_to_cart(request):
 	if form.is_valid():
 		cart = Cart(request)
 		row = ImageItem(
-			image=form.cleaned_data['item_id'],
+			pattern=form.cleaned_data['pattern_id'],
 			media=form.cleaned_data['media_option'],
 			media_orientation=form.cleaned_data['media_orientation'],
 			extra_text='',
