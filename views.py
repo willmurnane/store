@@ -25,7 +25,7 @@ def payment(request, result):
 
 @render_to('by_category.html')
 def filtered(request, predicate):
-	patterns, path = ApplyPredicates(predicate, Pattern.objects.all())
+	patterns, path = ApplyPredicates(predicate, Pattern.objects.all().select_related('image__name'))
 	bc = [[{'url': '/', 'text': 'Home'}]]
 	for crumb in path:
 		bc[0].append({'url': '/filter/fandom=%d-%d' % (crumb.lft, crumb.rght), 'text': crumb.name})
@@ -33,7 +33,7 @@ def filtered(request, predicate):
 	for crumb in children:
 		bc.append([{'url': '/filter/fandom=%d-%d' % (crumb.lft, crumb.rght), 'text': crumb.name}])
 	page = request.GET.get('page')
-	p = Paginator(patterns, 10)
+	p = Paginator(patterns, 40)
 	try:
 		patterns = p.page(page)
 	except PageNotAnInteger:
@@ -56,7 +56,7 @@ def pattern_page(request, pattern_id):
 		'scale': findImageScaling(pattern.pixel_width, pattern.pixel_height),
 		'media': Media.objects.all(),
 		'breadcrumbs': [[{'url': '/', 'text': 'Home'}]],
-		'carthelper': ItemForm(item_id=pattern_id),
+		'carthelper': ItemForm(pattern_id=pattern_id),
 	}
 
 @render_to('search_results.html')
@@ -85,9 +85,10 @@ def add_to_cart(request):
 		row.save()
 		cart.add(row, form.cleaned_data['media_option'].price_cents / 100, 1)
 	else:
-		print("Invalid form!")
-		print(request)
-		print(dir(request))
+		logging.debug("Invalid form!")
+		logging.debug(request)
+		logging.debug(dir(request))
+		# fixme: redirect to wherever we came from?
 	return HttpResponseRedirect(reverse('show_cart'))
 
 def remove_from_cart(request, item_id):

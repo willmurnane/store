@@ -7,8 +7,8 @@ class SearchForm(django.forms.Form):
 
 class ItemForm(django.forms.Form):
 	def __init__(self, *args, **kwargs):
-		item_id = kwargs.pop('item_id', None)
-		super(ItemForm, self).__init__(initial = {'item_id': item_id}, *args, **kwargs)
+		pattern_id = kwargs.pop('pattern_id', None)
+		super(ItemForm, self).__init__(initial = {'pattern_id': pattern_id}, *args, **kwargs)
 	pattern_id = django.forms.ModelChoiceField(queryset=Pattern.objects, widget=django.forms.HiddenInput)
-	media_option = django.forms.ModelChoiceField(queryset=Media.objects, widget=django.forms.RadioSelect)
+	media_option = django.forms.ModelChoiceField(queryset=Media.objects, widget=django.forms.RadioSelect, empty_label=None)
 	media_orientation = django.forms.ChoiceField(choices=(('portrait', 'Portrait'), ('landscape', 'Landscape')), widget=django.forms.RadioSelect)

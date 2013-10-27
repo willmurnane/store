@@ -114,7 +114,7 @@ class ImageItem(models.Model):
 	extra_text = models.CharField(max_length = 100)
 	special_instructions = models.TextField()
 	def __unicode__(self):
-		return "%s in %s" % (self.pattern, self.media)
+		return "%s in %s (orientation %s)" % (self.pattern.patternof.name, self.media.name, self.media_orientation)
 
 class Order(models.Model):
 	customer = models.ForeignKey(Customer)

@@ -12,7 +12,7 @@
         </tr>
         {% for item in cart %}
         <tr>
-            <td>{{ item.product }}</td>
+            <td>{% small_block item.product.pattern %}</td>
             <td>{{ item.quantity }}</td>
             <td>{{ item.total_price }}</td>
             <td><a href="{% url 'remove_from_cart' item.id %}">Remove</a>
