@@ -100,3 +100,19 @@ def remove_from_cart(request, item_id):
 @render_to('cart.html')
 def show_cart(request):
 	return { 'cart': Cart(request) }
+
+@render_to('checkout_success.html')
+def checkout_success(request):
+	#FIXME
+	return {}
+
+@render_to('checkout_canceled.html')
+def checkout_canceled(request):
+	#FIXME
+	return {}
+
+@render_to('order_status.html')
+def order_status(request):
+	#FIXME
+	return {}
+
