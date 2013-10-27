@@ -1,3 +1,4 @@
+#! /usr/bin/python3
 import glob
 from PIL import Image
 import json
@@ -10,13 +11,25 @@ for val in data:
   if val["model"] == "store.fandomhierarchy":
     typedict[val["fields"]["name"]] = val["pk"]
 
-f=open("pokemon.txt", encoding='utf-8')
-
 imagepk = 1
 patternpk = 1
 existing_images = {}
 image_patterns = {}
 
+def generation_and_starter(number):
+  generations = [0, 151, 251, 386, 493, 649, 718]
+  i = 0
+  while number > generations[i]:
+    i += 1
+  offset = number - generations[i - 1]
+  if i == 5:
+    offset -= 1
+  isStarter = (offset == 1 or offset == 4 or offset == 7)
+  if i == 1 and offset == 25:
+    isStarter = True # Pikachu
+  print("Pokemon #%d: generation %d offset %d starter: %s" % (number, i, offset, isStarter))
+  return (i, isStarter)
+  
 def addPattern(imagename, imagepk, fandoms):
   global patternpk
   im = Image.open(imagename)
@@ -35,9 +48,10 @@ def addPattern(imagename, imagepk, fandoms):
   else:
     image_patterns[imagepk] = [pattern]
 
-#{"pk": 1, "model": "store.pattern", "fields": {"pixel_width": 32, "pixel_height": 32, "image": "/media/pokemon-sprites-32x32/001MS.png", "fandoms": [8, 31, 25], "patternof": 1}},
+generation_names = {"Red/Green/Blue/Yellow": 1, "Gold/Silver/Crystal": 2, "Ruby/Sapphire/Emerald": 3, "Diamond/Pearl": 4, "Black/White": 5, "X/Y": 6}
+generation_ids = dict(map(lambda item: (item[1], typedict[item[0]]), generation_names.items()))
 
-
+f=open("pokemon.txt", encoding='utf-8')
 for line in f:
 	ignore, number, file_hint, name, types = line.split('\t', 4)
 	number = int(number[2:])
@@ -52,6 +66,8 @@ for line in f:
 	  existing_images[name] = image
 	picture_pattern = "pokemon-sprites-32x32/%sMS.png" % file_hint
 	file_list = glob.glob(picture_pattern)
+	generation, isStarter = generation_and_starter(number)
+	typeids.append(generation_ids[generation])
 	if len(file_list) == 0:
 	  raise(IOError("Cannot determine file for #%d, %s with glob %s!" % (number, name, picture_pattern)))
 	elif len(file_list) > 1:
