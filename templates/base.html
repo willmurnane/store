@@ -20,12 +20,8 @@
 </div>
 <div class="colmask leftmenu">
   <div class="colleft">
-    <div class="col1"> one
-{% block content %} {% endblock %}
-</div>
-    <div class="col2">{% block sidebar %}
-Sidebar
-<ul class="root">
+    <div class="col1">{% block content %}Fill in content here.  Shouldn't see this!{% endblock %}</div>
+    <div class="col2">{% block sidebar %}<ul class="root">
     {% recursetree tree %}
         <li>
             <a href="/filter/fandom={{ node.lft }}-{{ node.rght }}">{{ node.name }} ({{ node.sub_images }})</a>
@@ -36,8 +32,7 @@ Sidebar
             {% endif %}
         </li>
     {% endrecursetree %}
-</ul>
-{% endblock %}</div>
+</ul> {% endblock %}</div>
   </div>
 </div>
 

@@ -21,8 +21,6 @@ class FandomHierarchy(MPTTModel):
 class Image(models.Model):
 	name = models.CharField(max_length=100)
 	fandoms = models.ManyToManyField(FandomHierarchy)
-	def __unicode__(self):
-		return "%s (%dx%d)" % (self.name, self.pixel_width, self.pixel_height)
 
 class Pattern(models.Model):
 	pixel_width = models.PositiveIntegerField()
@@ -30,6 +28,8 @@ class Pattern(models.Model):
 	image = models.ImageField(upload_to='source_images')
 	fandoms = models.ManyToManyField(FandomHierarchy)
 	patternof = models.ForeignKey(Image)
+	def __unicode__(self):
+		return "%s (%dx%d)" % (self.image.name, self.pixel_width, self.pixel_height)
 
 class Media(models.Model):
 	name = models.CharField(max_length=100)
@@ -45,14 +45,6 @@ class Media(models.Model):
 	rotateable = models.BooleanField()
 	def __unicode__(self):
 		return "%s, %d in stock" % (self.name, self.stock_amount)
-class RotatedMedia(Media):
-	vk = models.AutoField(primary_key=True)
-	orientation = models.CharField(max_length=10)
-	def __unicode__(self):
-		return "%s oriented %s, %d in stock" % (self.name, self.orientation, self.stock_amount)
-	class Meta:
-		managed = False
-		db_table = 'store_rotatedmedia'
 
 class Customer(models.Model):
 	email = models.EmailField()
@@ -117,7 +109,8 @@ class Item(models.Model):
 
 class ImageItem(models.Model):
 	pattern = models.ForeignKey(Pattern)
-	media = models.ForeignKey(RotatedMedia)
+	media = models.ForeignKey(Media)
+	media_orientation = models.CharField(max_length = 10)
 	extra_text = models.CharField(max_length = 100)
 	special_instructions = models.TextField()
 	def __unicode__(self):

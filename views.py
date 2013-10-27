@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
-from store.models import FandomHierarchy, Image, RotatedMedia, Item, ImageItem
+from store.models import FandomHierarchy, Image, Media, Pattern, Item, ImageItem
 from store.itemfilters import ApplyPredicates
 from django.conf import settings
 import copy
@@ -23,14 +23,14 @@ def payment(request, result):
 
 @render_to('by_category.html')
 def filtered(request, predicate):
-	items, path = ApplyPredicates(predicate, Image.objects.all())
+	patterns, path = ApplyPredicates(predicate, Pattern.objects.all())
 	bc = [[{'url': '/', 'text': 'Home'}]]
 	for crumb in path:
 		bc[0].append({'url': '/filter/fandom=%d-%d' % (crumb.lft, crumb.rght), 'text': crumb.name})
 	children = path.reverse()[0].get_children()
 	for crumb in children:
 		bc.append([{'url': '/filter/fandom=%d-%d' % (crumb.lft, crumb.rght), 'text': crumb.name}])
-	return {'items': items, 'breadcrumbs': bc}
+	return {'patterns': patterns, 'breadcrumbs': bc}
 
 
 def findImageScaling(w, h):
@@ -38,13 +38,13 @@ def findImageScaling(w, h):
 	imageScale = max(min(int(goalWidth / w), int(goalHeight / h)), 1)
 	return { "width": w * imageScale, "height": h * imageScale }
 
-@render_to('item.html')
-def item_page(request, item_id):
-	item = get_object_or_404(Image, pk=item_id)
+@render_to('pattern.html')
+def pattern_page(request, pattern_id):
+	item = get_object_or_404(Pattern, pk=item_id)
 	return {
 		'item': item,
 		'scale': findImageScaling(item.pixel_width, item.pixel_height),
-		'media': RotatedMedia.objects.all(),
+		'media': Media.objects.all(),
 		'breadcrumbs': [[{'url': '/', 'text': 'Home'}]],
 		'carthelper': ItemForm(item_id=item_id),
 	}
@@ -68,6 +68,7 @@ def add_to_cart(request):
 		row = ImageItem(
 			image=form.cleaned_data['item_id'],
 			media=form.cleaned_data['media_option'],
+			media_orientation=form.cleaned_data['media_orientation'],
 			extra_text='',
 			special_instructions=''
 			)

@@ -3,12 +3,15 @@
 
 {% block title %}Welcome to $STORE!{% endblock %}
 {% block content %}
-<iframe src="http://gottastitchemall.tumblr.com/" width="100%" height="80%"> </iframe>
-{% if items %}
+{% if patterns %}
+Patterns in this category:
 <ul>
-{% for item in items %}
-  <li>{{ item.name }} ({{ item.pixel_width }}x{{ item.pixel_height }}) {{ item.fandoms.all }}</li>
+{% for pattern in patterns %}
+  <li>{{ pattern.image.name }} ({{ pattern.image.pixel_width }}x{{ pattern.image.pixel_height }}) {{ pattern.fandoms.all }}</li>
 {% endfor %}
 </ul>
+{% else %}
+page
+<iframe src="http://gottastitchemall.tumblr.com/" width="100%" height="80%"> </iframe>
 {% endif %}
 {% endblock %}
