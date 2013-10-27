@@ -1,6 +1,8 @@
 import glob
-import Image
+from PIL import Image
 import json
+import sys
+
 typedict = dict()
 f=open("tree_structure.json")
 data = json.loads(f.read())
@@ -8,7 +10,7 @@ for val in data:
   if val["model"] == "store.fandomhierarchy":
     typedict[val["fields"]["name"]] = val["pk"]
 
-f=open("pokemon.txt")
+f=open("pokemon.txt", encoding='utf-8')
 
 imagepk = 1
 patternpk = 1
@@ -40,7 +42,7 @@ for line in f:
 	ignore, number, file_hint, name, types = line.split('\t', 4)
 	number = int(number[2:])
 	types = types.strip().split('\t')
-	typeids = map(lambda x: typedict[x], types)
+	typeids = list(map(lambda x: typedict[x], types))
 	if name in existing_images:
 	  image = existing_images[name]
 	else:
@@ -57,7 +59,9 @@ for line in f:
 	else: # len == 1
 	  addPattern(file_list[0], image["pk"], typeids)
 
-result = existing_images.values()
+result = list(existing_images.values())
 for v in image_patterns.values():
   result.extend(v)
-print(json.dumps(result))
+
+out = open(sys.argv[1], 'w', encoding='utf-8')
+out.write(json.dumps(result, indent=1))
