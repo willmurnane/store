@@ -5,11 +5,18 @@ import json
 import sys
 
 typedict = dict()
+invtypedict = dict()
+starters = dict()
 f=open("tree_structure.json")
 data = json.loads(f.read())
 for val in data:
   if val["model"] == "store.fandomhierarchy":
     typedict[val["fields"]["name"]] = val["pk"]
+    invtypedict[val["pk"]] = val
+    if val["fields"]["name"] == "Starters":
+      starters[invtypedict[val["fields"]["parent"]]["pk"]] = val["pk"]
+# {"pk": 7, "model": "store.fandomhierarchy", "fields": {"rght": 13, "name": "Red/Green/Blue/Yellow", "parent": 1, "level": 1, "
+# {"pk": 8, "model": "store.fandomhierarchy", "fields": {"rght": 12, "name": "Starters", "parent": 7, "level": 2, "lft": 11, "tr
 
 imagepk = 1
 patternpk = 1
@@ -48,8 +55,11 @@ def addPattern(imagename, imagepk, fandoms):
   else:
     image_patterns[imagepk] = [pattern]
 
+print(starters)
 generation_names = {"Red/Green/Blue/Yellow": 1, "Gold/Silver/Crystal": 2, "Ruby/Sapphire/Emerald": 3, "Diamond/Pearl": 4, "Black/White": 5, "X/Y": 6}
 generation_ids = dict(map(lambda item: (item[1], typedict[item[0]]), generation_names.items()))
+print(generation_ids)
+starter_ids = dict(map(lambda item: (item[0], starters[item[1]]), generation_ids.items()))
 
 f=open("pokemon.txt", encoding='utf-8')
 for line in f:
@@ -68,6 +78,7 @@ for line in f:
 	file_list = glob.glob(picture_pattern)
 	generation, isStarter = generation_and_starter(number)
 	typeids.append(generation_ids[generation])
+	if isStarter: typeids.append(starter_ids[generation])
 	if len(file_list) == 0:
 	  raise(IOError("Cannot determine file for #%d, %s with glob %s!" % (number, name, picture_pattern)))
 	elif len(file_list) > 1:
