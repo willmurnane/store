@@ -5,7 +5,8 @@
 {% block content %}
     <table>
         <tr>
-            <th>Product</th>
+            <th>Pattern</th>
+            <th>Media</th>
             <th>Quantity</th>
             <th>Total Price</th>
             <th>Remove from Cart</th>
@@ -13,6 +14,7 @@
         {% for item in cart %}
         <tr>
             <td>{% small_block item.product.pattern %}</td>
+            <td>{{ item.media }}</td>
             <td>{{ item.quantity }}</td>
             <td>{{ item.total_price }}</td>
             <td><a href="{% url 'remove_from_cart' item.id %}">Remove</a>
